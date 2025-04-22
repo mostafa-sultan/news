@@ -1,14 +1,10 @@
 import React from 'react';
 import { FlatList, TouchableOpacity, ActivityIndicator, RefreshControl, Text } from 'react-native';
-import { useQuery } from '@tanstack/react-query';
-import { fetchNews } from '../api/api';
+import useNews from '../hooks/useNews';
 import NewsListItem from '../components/NewsListItem';
 
 const NewsListScreen = () => {
-  const { data, isLoading, isError, refetch } = useQuery({
-    queryKey: ['news'],
-    queryFn: fetchNews,
-  });
+  const { data, isLoading, isError, refetch } = useNews();
 
   if (isLoading) return <ActivityIndicator size="large" className="flex-1" />;
   if (isError) return <Text className="flex-1 text-center">Error loading news</Text>;
